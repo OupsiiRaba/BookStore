@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block title%} Détails | Book Store {% endblock %}
+{% block body %}
+
+<div class="container">
+ <h1 class="title p-1">"{{ livre.titre }}"</h1>
+    <div class="img-fluid">
+        <img width="85%" src="{{ asset('images/icons/tag-couvertures-livres-8.jpg') }}" alt="{{ livre.titre }}"/>
+    </div>
+    <div class="content">
+
+     <li class="list-group-item list-group-item-active"> Date de parution du livre : {{ livre.getDateDeParution() | date("d/m/Y")}}</li>
+     <li class="list-group-item list-group-item-info"> Titre du livre: "{{ livre.titre }}"</li>
+     <li class="list-group-item list-group-item-warning"> ISBN      : {{ livre.isbn }}</li>
+     <li class="list-group-item list-group-item-info"> Nombre de pages : {{ livre. getNombrePages() }}</li>
+     <li class="list-group-item list-group-item-warning">Evaluation du livre  : {{ livre.note }}</li>
+     <li class="list-group-item list-group-item-info">  {% for a in livre.auteurs %}
+            Auteurs du livre: {{ a.getNomPrenom() }}
+            {% endfor %}
+     </li>
+     <li class="list-group-item list-group-item-active">  
+          
+             {% for g in livre.genre %}
+           Genre du livre: {{ g.getNom() }}
+            {% endfor %}
+            </li>
+ </div>   
+   
+ </div>   
+ {% endblock  %}

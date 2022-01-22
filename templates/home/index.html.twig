@@ -1,0 +1,114 @@
+{% extends "base.html.twig" %}
+
+{% block title%} Accueil | Book Store{% endblock %}
+
+{% block body %}
+   
+<form method="POST" onsubmit="list(event)">
+  <div class="row">
+    <div class="col">
+    <p>        </p>
+    <label for="inputState">Date min</label>
+      <input  id="dateMin" type="number"  class="form-control" placeholder="Date min " >
+    </div>
+    <div class="col">
+    <p>        </p>
+    <label for="inputState">Date max</label>
+      <input id="dateMax" type="number"  class="form-control" placeholder="Date max" >
+      
+    </div>
+    
+  </div>
+</form>
+
+<form>
+  <div class="form-row">
+   <div class="form-group col-md-6">
+      <label for="inputState">Note</label>
+      <select id="inputState" class="form-control">
+        	<option selected>Note</option>
+		{% for i in 0..20 %}
+			<option value="{{ i }}">{{ i }}</option>
+		{% endfor %}
+      </select>
+    </div>
+
+  <div class="form-group col-md-6">
+      <label for="inputState">Date de publication</label>
+      <select id="inputState" class="form-control">
+        	<option selected>Date de publication</option>
+		{% for date in dates|sort %}
+			<option value="{{ date.date_de_parution|date("m/d/Y")}}">{{date.date_de_parution|date("m/d/Y")}}</option>
+		{% endfor %}
+      </select>
+    </div>
+    
+  </div>
+  </form>
+  <form>
+
+  <div class="form-row">
+  <div class="form-group col-md-6">
+      <label for="inputState">Auteur</label>
+      <select id="inputState" class="form-control">
+        	<option selected>Auteur</option>
+		{% for auteur in auteurs %}
+			<option value="{{auteur.id}}">{{auteur.nomPrenom}}</option>
+		{% endfor %}
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputState">Genre</label>
+      <select id="inputState" class="form-control">
+       <option selected>Genre</option>
+		{% for genre in genres %}
+			<option value="{{genre.id}}">{{genre.nom}}</option>
+		{% endfor %}
+
+      </select>
+    </div>
+     </div>
+  </form>
+
+
+	
+    		<button class="btn btn-primary my-6">Filtrer</button>
+        <button type="reset" class="btn btn-secondary">Rénitialiser</button>
+
+    
+
+	
+  <p> </p>
+
+
+<div class="row ">
+    {% for livre in livres %}
+            <div class="card col-md-4" style="width: 18rem;">
+           <img class="date">  Paru le {{ livre.getDateDeParution() | date("d/m/Y")}} 
+           {% for a in livre.auteurs %}
+            <li>{{ a.getNomPrenom() }}</li>
+            {% endfor %}
+           
+    
+
+        <img class="card-img-top" src="{{ asset('images/icons/tag-couvertures-livres-8.jpg') }}" alt="{{ livre.titre }}"/>
+                <div class="card-body">
+                    <h5 class="card-title">"{{ livre.titre }}"</h5>
+                    <a href="{{ path('show' , {'id':livre.id})}}" class="btn btn-primary">En savoir plus </a>
+                </div>
+            </div> 
+            
+    {% endfor %}
+
+</div>
+    <div class="pagination justify-content-center px-2">
+    
+      {{ knp_pagination_render(livres) }}
+    </div>
+     
+
+{% endblock %}
+{% block javascripts %}
+	<script src="assets/js/main2.js"></script>
+ 
+{% endblock %}

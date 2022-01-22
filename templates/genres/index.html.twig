@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+  {% block title %}
+   Genres | Book Store
+  {% endblock %}
+
+  {% block body %}
+
+
+    <h3 class="pb-3">Liste des genres</h3>
+    <div class="table-responsive-sm">
+      <table class="table table-hover">
+        <thead>
+        <th>Image</th>
+          <th>Nom</th>
+          
+
+        </thead>
+        <tbody>
+          {# on boucle tous les articles avec for #}
+          {% for genre in genres %}
+            <tr>
+            <td><img src="{{ asset('images/images.png') }}" width="40" height="40" class="img-fluid float-left mr-4 img-list" alt=""></td>
+              <td text-align="center" >{{ genre.nom }}</td>
+            
+              
+            </tr>
+         
+          
+          
+           
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    
+
+ 
+
+  {% endblock %}

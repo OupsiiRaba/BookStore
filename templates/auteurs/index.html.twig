@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+  {% block title %}
+    Auteurs | Book Store 
+  {% endblock %}
+
+  {% block body %}
+
+    <h3 class="pb-3">Liste des auteurs</h3>
+    <div class="table-responsive-sm">
+      <table class="table table-hover">
+        <thead>
+   
+        <th>Image</th>
+          <th>Nom et prénom</th>
+          <th>Sexe</th>
+          <th>Date de naissance</th>
+          <th>Nationnalité</th>
+        </thead>
+        <tbody>
+          {# on boucle tous les auteurs avec for #}
+          {% for auteur in auteurs %}
+            <tr>
+              <td><img src="{{ asset('images/icons/5809888.png') }}"  width="40" height="40"class="img-fluid float-left mr-4 img-list" alt=""></td>
+              <td>{{ auteur.getNomPrenom() }}</td>
+              <td>{{ auteur.sexe }}</td>
+              <td>{{ auteur.getDateDeNaissance() | date("d/m/Y") }}</td>
+              <td>{{ auteur.nationalite }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    
+
+  {% endblock %}
